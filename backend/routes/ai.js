@@ -12,18 +12,13 @@ router.post("/chat", async (req, res) => {
     await Chat.create({
       userId,
       sender: "user",
-      text: message
+      text: message,
     });
 
-    // Fetch previous chat history for context
+    // Fetch previous chat history
     const previousChats = await Chat.find({ userId }).sort({
-      createdAt: 1
+      createdAt: 1,
     });
-
-    console.log("API KEY EXISTS:", !!process.env.OPENROUTER_API_KEY);
-console.log("USER ID:", userId);
-console.log("MESSAGE:", message);
-
 
     // Request AI response from OpenRouter
     const response = await axios.post(
@@ -45,16 +40,9 @@ LANGUAGE RULES
 ==========================
 
 1. Detect the user's language automatically.
-
-2. If the user writes in Telugu,
-reply mostly in Telugu.
-
-3. If the user writes in Tenglish,
-reply in Tenglish.
-
-4. If the user writes in English,
-reply in English.
-
+2. If the user writes in Telugu, reply mostly in Telugu.
+3. If the user writes in Tenglish, reply in Tenglish.
+4. If the user writes in English, reply in English.
 5. Keep all technical words in English.
 
 Never mix languages randomly.
@@ -64,28 +52,16 @@ TEACHING STYLE
 ==========================
 
 1. Never start with a definition.
-
 2. Always begin with a real-life example.
-
 3. Explain like teaching a beginner.
-
 4. Use simple vocabulary.
-
 5. Keep paragraphs short.
-
 6. Explain WHY before WHAT.
-
 7. Use stories whenever possible.
-
 8. Give small code examples.
-
 9. Explain every line of code.
-
-10. If the student says "Ardham kaledu" or "I didn't understand",
-explain again using a different example.
-
+10. If the student says "Ardham kaledu" or "I didn't understand", explain again using a different example.
 11. Encourage students.
-
 12. Never say "As an AI".
 
 ==========================
@@ -95,13 +71,9 @@ RESPONSE FORMAT
 Always use Markdown.
 
 Use headings.
-
 Use bullet points.
-
 Use numbered lists.
-
 Use bold text.
-
 Always wrap code inside fenced code blocks.
 
 Example:
@@ -142,84 +114,66 @@ JWT Authentication
 Full Stack Development
 
 Remember previous conversation history.
-`
+`,
           },
 
-          ...previousChats.map(chat => ({
+          ...previousChats.map((chat) => ({
             role: chat.sender === "user" ? "user" : "assistant",
-            content: chat.text
-          }))
+            content: chat.text,
+          })),
         ],
 
         max_tokens: 2048,
-        temperature: 0.7
+        temperature: 0.7,
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
           "HTTP-Referer": "https://learningplatform-mocha.vercel.app",
-          "X-Title": "EduNexa AI Mentor"
-        }
+          "X-Title": "EduNexa AI Mentor",
+        },
       }
     );
 
     const aiReply = response.data.choices[0].message.content;
 
-    // Save AI response
+    // Save AI reply
     await Chat.create({
       userId,
       sender: "ai",
-      text: aiReply
+      text: aiReply,
     });
 
-    // Send response to frontend
     res.json({
-      reply: aiReply
+      reply: aiReply,
     });
+  } catch (error) {
+    console.error("AI Mentor Error:", error.message);
 
-  }  catch (error) {
-
-  console.log("===== CHAT ERROR =====");
-  console.log("STATUS:", error.response?.status);
-  console.log(
-    JSON.stringify(error.response?.data, null, 2)
-  );
-  console.log("MESSAGE:", error.message);
-  console.log("=========================");
-
-  res.status(500).json({
-    message: error.message
-  });
-
-}
+    res.status(500).json({
+      message: "Something went wrong while generating AI response.",
+    });
+  }
 });
 
-// Get chat history for a user
+// Get chat history
 router.get("/history/:userId", async (req, res) => {
-
   try {
-
     const chats = await Chat.find({
-      userId: req.params.userId
+      userId: req.params.userId,
     }).sort({
-      createdAt: 1
+      createdAt: 1,
     });
 
     res.json(chats);
-
   } catch (error) {
-
-    console.log("===== HISTORY ERROR =====");
-    console.log(error);
-    console.log("=========================");
+    console.error("History Error:", error.message);
 
     res.status(500).json({
-      message: error.message
+      message: "Unable to fetch chat history.",
     });
-
   }
-
 });
 
 module.exports = router;
