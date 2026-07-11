@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {FaLock, FaCheckCircle} from "react-icons/fa";
 import {MdPlayArrow} from "react-icons/md";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import { htmlLessons, htmlTopics } from "../data/htmlLessons";
 import { cssLessons, cssTopics } from "../data/cssLessons";
 import { jsLessons, jsTopics } from "../data/jsLessons";
@@ -48,6 +48,7 @@ function CourseDetails() {
   const [completedTopics, setCompletedTopics] = useState([]); // Stores completed topics fetched from database
   const [currentTopic, setCurrentTopic] = useState(0); // Stores currently selected lesson
   const [searchQuery, setSearchQuery] = useState("");  // Search bar state
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   // Load lessons and topics based on selected course
   const lessons = courseLessonsMap[courseName] || [];
@@ -145,6 +146,7 @@ const handleNext = () => {
 
   if (currentTopic < topics.length - 1) {
     setCurrentTopic(currentTopic + 1);
+    setSidebarOpen(false);
   }
 
 };
@@ -154,6 +156,7 @@ const handlePrevious = () => {
   if (currentTopic > 0) {
     const prevTopic = currentTopic - 1;
     setCurrentTopic(prevTopic);
+    setSidebarOpen(false);
   }
 };
 
@@ -171,10 +174,37 @@ if (!lesson) {
 
       <div className="home-page">
 
+        <div className="course-mobile-header">
+
+  <button
+    className="course-menu-btn"
+    onClick={() => setSidebarOpen(true)}
+  >
+    <FiMenu />
+  </button>
+
+  <h2>{courseName.toUpperCase()}</h2>
+
+</div>
+
   {/* Sidebar */}
-  <div className="course-sidebar">
+  <div className={`course-sidebar ${sidebarOpen ? "show-course-sidebar" : ""}`}>
     
 <div className="course-sidebar-top">
+
+   <button
+    className="close-sidebar-btn"
+    onClick={() => setSidebarOpen(false)}
+  >
+    <FiX />
+  </button>
+
+  <div
+    className="back-btn"
+    onClick={() => navigate("/MyCourses")}
+  >
+    ← Back
+  </div>
 
     <div
   className="back-btn"
@@ -225,6 +255,7 @@ if (!lesson) {
 
   if (completedTopics.includes(index) || index === currentTopic) {
     setCurrentTopic(index);
+    setSidebarOpen(false);
   }
 
   }}

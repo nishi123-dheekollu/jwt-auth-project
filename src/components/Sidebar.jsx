@@ -15,16 +15,16 @@ function Sidebar() {
       {/* Mobile Header */}
       <div className="mobile-header">
 
-        <h2>EduNexa</h2>
+  <button
+    className="menu-btn"
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    ☰
+  </button>
 
-        <button
-          className="menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
+  <h2>EduNexa</h2>
 
-      </div>
+</div>
 
       {/* Sidebar */}
       <div className={`sidebar ${menuOpen ? "show-sidebar" : ""}`}>
