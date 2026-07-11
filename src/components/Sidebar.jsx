@@ -11,7 +11,6 @@ function Sidebar() {
 
   return (
     <>
-
       {/* Mobile Header */}
       <div className="mobile-header">
 
@@ -19,7 +18,7 @@ function Sidebar() {
     className="menu-btn"
     onClick={() => setMenuOpen(!menuOpen)}
   >
-    ☰
+     <FiMenu />
   </button>
 
   <h2>EduNexa</h2>

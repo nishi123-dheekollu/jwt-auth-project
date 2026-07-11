@@ -432,6 +432,7 @@ button{
   .logout-btn{
     width:100%;
     margin-top:20px;
+    display:none;
   }
 
   .hero{
@@ -934,7 +935,7 @@ button{
 }
 
 /* my course page  TABLET fresponsive*/
-@media (max-width:768px){
+@media (max-width:767px){
 
 .hero{
   margin-left:0;
