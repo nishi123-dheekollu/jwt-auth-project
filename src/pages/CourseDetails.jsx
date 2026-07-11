@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {FaLock, FaCheckCircle} from "react-icons/fa";
 import {MdPlayArrow} from "react-icons/md";
-import { FiSearch, FiMenu, FiX } from "react-icons/fi";
+import { FiSearch, FiMenu} from "react-icons/fi";
 import { htmlLessons, htmlTopics } from "../data/htmlLessons";
 import { cssLessons, cssTopics } from "../data/cssLessons";
 import { jsLessons, jsTopics } from "../data/jsLessons";
@@ -49,6 +49,19 @@ function CourseDetails() {
   const [currentTopic, setCurrentTopic] = useState(0); // Stores currently selected lesson
   const [searchQuery, setSearchQuery] = useState("");  // Search bar state
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  <div className="course-mobile-header">
+
+  <button
+    className="menu-btn"
+    onClick={() => setSidebarOpen(!sidebarOpen)}
+  >
+     <FiMenu />
+  </button>
+
+  <h2>Course</h2>
+
+</div>
   
   // Load lessons and topics based on selected course
   const lessons = courseLessonsMap[courseName] || [];
@@ -176,13 +189,6 @@ if (!lesson) {
 
         <div className="course-mobile-header">
 
-  <button
-    className="course-menu-btn"
-    onClick={() => setSidebarOpen(true)}
-  >
-    <FiMenu />
-  </button>
-
   <h2>{courseName.toUpperCase()}</h2>
 
 </div>
@@ -191,21 +197,6 @@ if (!lesson) {
   <div className={`course-sidebar ${sidebarOpen ? "show-course-sidebar" : ""}`}>
     
 <div className="course-sidebar-top">
-
-   <button
-    className="close-sidebar-btn"
-    onClick={() => setSidebarOpen(false)}
-  >
-    <FiX />
-  </button>
-
-  <div
-    className="back-btn"
-    onClick={() => navigate("/MyCourses")}
-  >
-    ← Back
-  </div>
-
     <div
   className="back-btn"
   onClick={() => navigate("/MyCourses")}>← Back
