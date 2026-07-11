@@ -417,7 +417,7 @@ button{
   }
 
   .sidebar{
-    left:-260px;          /* Hide by default */
+    left:-260px;
     transition:.3s;
     display:flex;
     flex-direction:column;
@@ -426,13 +426,13 @@ button{
   }
 
   .sidebar.show-sidebar{
-    left:0;               /* Show when menu opens */
+    left:0;
   }
 
   .logout-btn{
     width:100%;
-    margin-top:20px;
-    display:none;
+    margin-top:auto;
+    display:block;
   }
 
   .hero{
@@ -503,7 +503,7 @@ button{
   color:#6b7280;
 }
 
-.avatar{
+.mini-avatar{
   width:45px;
   height:45px;
   border-radius:50%;
@@ -540,6 +540,8 @@ button{
   transform:translateY(-50%);
   color:#888;
 }
+
+
 
 /* ==========================
    Search Bar Responsive
@@ -578,26 +580,87 @@ button{
 
 }
 
-/* Mobile */
+/* very small mobile responsive */
 @media (max-width:480px){
+.hero{
+    padding:16px;
+}
 
-  .search-container{
-    width:100%;
-  }
+/* Welcome */
+.welcome-section h1{
+    font-size:32px;
+    line-height:1.2;
+    margin-bottom:8px;
+}
 
-  .search-bar{
-    width:100%;
-    padding:12px 14px;
-    padding-left:38px;
-    font-size:14px;
-    margin-bottom:18px;
-  }
-
-  .search-icon{
-    left:14px;
-    top:30%;
+.welcome-section p{
     font-size:15px;
-  }
+}
+
+/* Profile Card */
+.profile-mini{
+    border-radius:18px;
+    padding:18px;
+}
+
+/* Cards */
+.stats-container{
+    gap:16px;
+}
+
+.home-stat-card{
+    min-height:130px;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(15,118,110,.08);
+}
+
+.home-stat-card h2{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.home-stat-card h3{
+    font-size:18px;
+}
+
+.home-stat-card p{
+    font-size:14px;
+}
+
+/* Progress bar */
+.progress-bar{
+    height:12px;
+}
+
+/* Banner */
+.hero-banner{
+    border-radius:22px;
+    padding:24px;
+}
+
+.hero-banner h2{
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.roadmap-points p{
+    font-size:15px;
+}
+
+/* Motivation Card */
+.quote-card{
+    border-radius:18px;
+    padding:22px;
+}
+
+.quote-card h3{
+    font-size:20px;
+}
+
+.quote-card p{
+    font-size:15px;
+}
 
 }
 
@@ -727,37 +790,24 @@ button{
   color:#555;
 }
 
-/* home page tablet responsive */
-@media (max-width:992px){
-
-.hero{
-    margin-left:0;
-    padding:25px;
+.mobile-card-icon{
+    display:none;
 }
 
-.top-header{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:20px;
-}
-
-.profile-mini{
-    width:100%;
-}
-
-.stats-container{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.hero-banner h2{
-    font-size:28px;
-}
-
-}
-
-/* hpme page mobile responsive */
+/* hOme page TABLET responsive */
 @media (max-width:768px){
-
+.mobile-card-icon{
+    display:flex;
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:#e6f7f3;
+    color:#0f766e;
+    font-size:24px;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:12px;
+}
 .hero{
     padding:18px;
 }
@@ -806,8 +856,58 @@ button{
 
 }
 
-/* very small mobile responsive */
+/* hOme page  mobile responsive */
 @media (max-width:480px){
+
+  .profile-mini{
+    display:none;
+}
+
+.welcome-section h1{
+    font-size:28px;
+    line-height:1.3;
+}
+
+.welcome-section p{
+    font-size:15px;
+}
+
+  .mobile-card-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#dffaf4;
+    color:#059669;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+}
+
+.mobile-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+
+.mobile-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-left span{
+    font-size:15px;
+    font-weight:600;
+    color:#444;
+}
+
+.mobile-row h2{
+    margin:0;
+    font-size:24px;
+    color:#0f5c4d;
+}
 
 .hero{
     padding:15px;
@@ -819,6 +919,15 @@ button{
 
 .hero-banner{
     border-radius:18px;
+}
+
+.home-stat-card{
+    padding:18px;
+}
+
+.home-stat-card:active{
+    transform:scale(.97);
+    box-shadow:0 4px 15px rgba(15,118,110,.18);
 }
 
 .home-stat-card h2{
@@ -1190,7 +1299,9 @@ button{
 @media (max-width:768px){
 
 .course-sidebar{
-    width:220px;
+    left:-260px;
+    transition:.3s;
+    z-index:1000;
 }
 
 .lesson-header h1{
@@ -1210,25 +1321,67 @@ button{
     font-size:14px;
 }
 
+.course-sidebar.show-course-sidebar{
+    left:0;
+}
+
+.hero{
+    margin-top:75px;
+}
+
 }
 
 /* course details page  MOBILE responsive */
 @media (max-width:480px){
 
-.course-sidebar{
-    position:relative;
+.course-mobile-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    position:fixed;
+    top:0;
+    left:0;
     width:100%;
-    height:auto;
+    padding:15px 20px;
+    background:#0f5c4d;
+    color:#fff;
+    z-index:1001;
 }
 
-.home-page{
-    flex-direction:column;
+.course-mobile-header h2{
+    margin:0;
+    font-size:22px;
+}
+
+.menu-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.course-sidebar{
+    width:260px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:-260px;
+    transition:.3s;
+    z-index:1000;
+}
+
+.course-sidebar.show-course-sidebar{
+    left:0;
 }
 
 .hero{
     margin-left:0;
+    margin-top:75px;
     padding:20px;
 }
+
+/* Remaining mobile styles */
 
 .lesson-header{
     margin-bottom:30px;
@@ -1501,15 +1654,20 @@ button{
 }
 
 .chat-input{
-    flex-direction:column;
+     flex-direction:row;
+    align-items:center;
+    gap:10px;
 }
 
 .chat-input input{
-    width:100%;
+    flex:1;
+    width:auto;
 }
 
 .chat-input button{
-    width:100%;
+     width:50px;
+    height:50px;
+    flex-shrink:0;
 }
 
 }
@@ -1519,24 +1677,20 @@ button{
     justify-content:center;
     margin-top:30px;
 }
-
-.profile-card{
+.profile-top{
     width:100%;
     max-width:650px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;   /* <-- main change */
+    gap:28px;
     background:#fff;
     border-radius:20px;
     padding:35px;
-    margin:auto;
     box-shadow:0 12px 30px rgba(0,0,0,.08);
     border:1px solid #edf2f7;
-    position: relative;
-}
-
-.profile-top{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
+    position:relative;
 }
 
 .profile-top h2{
@@ -1545,7 +1699,7 @@ button{
     color:#222;
 }
 
-.profile-avatar{
+.avatar{
     width:95px;
     height:95px;
     border-radius:50%;
@@ -1575,13 +1729,6 @@ button{
     margin-top:6px;
 }
 
-.profile-divider{
-    margin:30px 0;
-    border:none;
-    height:1px;
-    background:#e8e8e8;
-}
-
 .edit-profile-btn{
     position:absolute;
     top:24px;
@@ -1599,13 +1746,6 @@ button{
     transform:scale(1.1);
 }
 
-.profile-card h2{
-    margin-top:15px;
-}
-
-.profile-card hr{
-    margin:25px 0;
-}
 
 .profile-stats{
     display:grid;
@@ -1831,102 +1971,67 @@ button{
     gap:15px;
 }
 
-/* Profile Page   Laptop Responsive */
-@media (max-width:992px){
-
-    .profile-card{
-        max-width:100%;
-        padding:28px;
-    }
-
-    .profile-avatar{
-        width:80px;
-        height:80px;
-        font-size:32px;
-    }
-
-    .profile-top h2{
-        font-size:26px;
-    }
-
-    .profile-stats{
-        gap:16px;
-    }
-
+.avatar{
+    width:72px;
+    height:72px;
+    margin:0;
+    flex-shrink:0;
 }
 
-/*  Profile Page Tablet Responsive */
-@media (max-width:768px){
-
-    .profile-card{
-        padding:24px;
-    }
-
-    .profile-stats{
-        grid-template-columns:1fr;
-    }
-
-    .stats-title{
-        font-size:20px;
-    }
-
-    .profile-stat-card h3{
-        font-size:24px;
-    }
-
-    .change-password-full-btn{
-        font-size:15px;
-    }
-
+.profile-details{
+    flex:0 0 260px;   /* fixed width */
 }
 
-/*  Profile Page Mobile Responsive */
+.profile-details h2{
+    margin:0;
+    font-size:24px;
+    line-height:1.1;
+}
+
+.profile-details .role{
+    margin:6px 0 4px;
+    font-size:15px;
+    font-weight:600;
+    color:#0f766e;
+}
+
+.profile-details .email{
+    margin:0;
+    font-size:14px;
+    color:#6b7280;
+    word-break:break-word;
+    line-height:1.4;
+}
+
+.stats-wrapper{
+    margin-top:20px;
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
 @media (max-width:480px){
 
-    .profile-card{
-        padding:20px;
-        border-radius:16px;
-    }
+.hero{
+    width:100%;
+    margin-left:0;
+    padding:16px;
+    box-sizing:border-box;
+}
 
-    .profile-avatar{
-        width:70px;
-        height:70px;
-        font-size:28px;
-    }
+.profile-container{
+    width:100%;
+    justify-content:center;
+}
 
-    .profile-top h2{
-        font-size:22px;
-    }
+.profile-card{
+    width:100%;
+}
 
-    .profile-email{
-        font-size:14px;
-        word-break:break-word;
-    }
-
-    .profile-stat-card{
-        padding:18px;
-    }
-
-    .stat-icon{
-        font-size:22px;
-    }
-
-    .profile-stat-card h3{
-        font-size:22px;
-    }
-
-    .edit-modal{
-        width:92%;
-        padding:24px;
-    }
-
-    .modal-buttons{
-        flex-direction:column;
-    }
-
-    .modal-buttons button{
-        width:100%;
-    }
+.profile-top,
+.stats-wrapper{
+    width:100%;
+}
 
 }
 

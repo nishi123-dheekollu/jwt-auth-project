@@ -49,19 +49,6 @@ function CourseDetails() {
   const [currentTopic, setCurrentTopic] = useState(0); // Stores currently selected lesson
   const [searchQuery, setSearchQuery] = useState("");  // Search bar state
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  <div className="course-mobile-header">
-
-  <button
-    className="menu-btn"
-    onClick={() => setSidebarOpen(!sidebarOpen)}
-  >
-     <FiMenu />
-  </button>
-
-  <h2>Course</h2>
-
-</div>
   
   // Load lessons and topics based on selected course
   const lessons = courseLessonsMap[courseName] || [];
@@ -189,9 +176,16 @@ if (!lesson) {
 
         <div className="course-mobile-header">
 
+  <button
+    className="menu-btn"
+    onClick={() => setSidebarOpen(!sidebarOpen)}
+  >
+    <FiMenu />
+  </button>
+
   <h2>{courseName.toUpperCase()}</h2>
 
-</div>
+        </div>
 
   {/* Sidebar */}
   <div className={`course-sidebar ${sidebarOpen ? "show-course-sidebar" : ""}`}>

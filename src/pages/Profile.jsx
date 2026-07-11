@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import {FaBook,FaRobot,FaGraduationCap,FaChartLine} from "react-icons/fa";
-import { FiEdit2 } from "react-icons/fi";
+import { FiEdit2, FiMenu } from "react-icons/fi";
 import EditProfileModal from "../components/EditProfileModal";
 import ChangePasswordModal from "../components/ChangePasswordModal";
+
 
 // Profile page
 function Profile() {
@@ -61,33 +62,34 @@ function Profile() {
            {/* Profile Card */}
             <div className="profile-card">
 
-              <button
-  className="edit-profile-btn"
-  onClick={() => setShowEdit(true)}
->
-  <FiEdit2 />
-</button>
              {/* User Avatar & Basic Information */}
               <div className="profile-top">
+                <button
+                className="edit-profile-btn"
+                onClick={() => setShowEdit(true)}
+              >
+              <FiEdit2 />
+              </button>
 
-                <div className="profile-avatar">
-                  {profile.name.charAt(0).toUpperCase()}
-                </div>
+                 <div className="avatar">
+  {profile?.name?.charAt(0).toUpperCase()}
+                 </div>
 
-                <h2>{profile.name}</h2>
+                <div className="profile-details">
+  <h2>{profile?.name}</h2>
 
-                <span className="profile-role">
-                  Full Stack Learner 🚀
-                </span>
+  <p className="role">
+    Full Stack Learner 
+  </p>
 
-                <p className="profile-email">
-                  {profile.email}
-                </p>
+  <p className="email">
+    {profile?.email}
+  </p>
+               </div>
 
               </div>
 
-              <hr className="profile-divider" />
-
+           <div className="stats-wrapper">
               <h3 className="stats-title">
                 📚 Learning Statistics
               </h3>
@@ -147,9 +149,11 @@ function Profile() {
                 🔒 Change Password
               </button>
 
-            </div>
+           </div>
 
           </div>
+          
+</div>
 
         )}
 

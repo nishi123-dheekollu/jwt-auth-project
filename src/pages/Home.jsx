@@ -2,6 +2,7 @@ import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {FaBookOpen,FaCheckCircle,FaChartLine,FaFire} from "react-icons/fa";
 
 {/* Dashboard home page */}
 function Home() {
@@ -75,7 +76,7 @@ function Home() {
           </div>
 
           <div className="profile-mini">
-            <div className="avatar">
+            <div className="mini-avatar">
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
@@ -87,41 +88,87 @@ function Home() {
 
         { /* Dashboard statistics cards */} 
         <div className="stats-container">
-          <div className="home-stat-card">
-            <h2>10</h2>
-            <p>Total Courses</p>
-          </div>
 
-          <div className="home-stat-card">
-            <h2>{loading ? "..." : completedCourses}</h2>
-            <p>Completed Courses</p>
-          </div>
+  {/* Total Courses */}
+  <div className="home-stat-card">
 
-          <div className="home-stat-card">
-            <h3>Learning Progress</h3>
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${overallProgress}%` }}
-              ></div>
-            </div>
-            <p>{loading ? "Loading..." : `${overallProgress}% Completed`}</p>
-          </div>
+    <div className="mobile-row">
 
-          <div className="home-stat-card">
-            <h3>🔥 Learning Streak</h3>
-            <h2 style={{ color: "#0f5c4d" }}>
-              {loading ? "..." : `${streakCount} ${streakCount === 1 ? "Day" : "Days"}`}
-            </h2>
-            <p>
-              {streakCount > 0
-                ? streakCount >= 7
-                  ? "You're on fire! 🔥"
-                  : "Keep it up!"
-                : "Start learning today!"}
-            </p>
-          </div>
+      <div className="mobile-left">
+        <div className="mobile-card-icon">
+          <FaBookOpen />
         </div>
+
+        <span>Total Courses</span>
+      </div>
+
+      <h2>10</h2>
+
+    </div>
+
+  </div>
+
+  {/* Completed Courses */}
+  <div className="home-stat-card">
+
+    <div className="mobile-row">
+
+      <div className="mobile-left">
+        <div className="mobile-card-icon">
+          <FaCheckCircle />
+        </div>
+
+        <span>Completed Courses</span>
+      </div>
+
+      <h2>{loading ? "..." : completedCourses}</h2>
+
+    </div>
+
+  </div>
+
+  {/* Learning Progress */}
+  <div className="home-stat-card">
+
+    <h3>Learning Progress</h3>
+
+    <div className="progress-bar">
+      <div
+        className="progress-fill"
+        style={{ width: `${overallProgress}%` }}
+      ></div>
+    </div>
+
+    <p>
+      {loading ? "Loading..." : `${overallProgress}% Completed`}
+    </p>
+
+  </div>
+
+  {/* Learning Streak */}
+  <div className="home-stat-card">
+
+    <div className="mobile-row">
+
+      <div className="mobile-left">
+        <div className="mobile-card-icon">
+          <FaFire />
+        </div>
+
+        <span>Learning Streak</span>
+      </div>
+
+      <h2>
+        {loading
+          ? "..."
+          : `${streakCount} ${streakCount === 1 ? "Day" : "Days"}`}
+      </h2>
+
+    </div>
+
+  </div>
+
+</div>
 
         <h2 className="section-title">MERN Stack Learning Roadmap</h2>
 
